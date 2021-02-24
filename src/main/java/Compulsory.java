@@ -1,3 +1,12 @@
+/**
+ * Created by Craciun Tudor
+ */
+
+/**
+ * This class holds the Compulsory part of the 2nd laboratory
+ * It showcases a 'hardcoded' example on how the created classes should be used
+ */
+
 public class Compulsory {
     public void executeCompulsory() {
         initializeHardCodedInstance();
@@ -31,8 +40,12 @@ public class Compulsory {
 
     private void displayTable(Source source) {
         displayMessageNewLine(source.getName() + " ");
-        for(int i = 0; i < source.destinationsAndCosts.size(); i++) {
-            displayMessageNewLine("   " + source.destinationsAndCosts.get(i).destination.getName() + " " + source.destinationsAndCosts.get(i).cost);
+        for(int destinationAndCost = 0; destinationAndCost < source.destinationsAndCosts.size(); destinationAndCost++) {
+            displayMessageNewLine("   " +
+                    source.destinationsAndCosts.get(destinationAndCost).destination.getName() +
+                    " " +
+                    source.destinationsAndCosts.get(destinationAndCost).cost
+            );
         }
     }
 
