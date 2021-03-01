@@ -5,30 +5,24 @@ import java.util.ArrayList;
  */
 
 /**
- * This class keeps all information about a given source
- * The {@link #destinationsAndCosts} ArrayList holds all the destinations to where the current source can go
- *                                                                                        and their adjacent costs
+ * This class keeps all information about a given source; It is an abstract class out of which Factories and Warehouses are created
  */
 
-public class Source {
+abstract class Source extends Place {
 
-    private String name;
-    private SourceType type;
+    /**
+     * We will keep the attribute 'type' because if we will pass a Factory or Warehouse object as a SourceOptional object (their common superclass)
+     *                                                                                      we want to have a way to know which is what
+     * P.S.: We might not have need of this, but we'll see as we implement more code
+     */
+
+    private String type;
     private int supply;
-    protected ArrayList<Expense> destinationsAndCosts = new ArrayList();
 
-    public Source(String name, SourceType type, int supply) {
+    public Source(String name, String type, int supply) {
         this.name = name;
         this.type = type;
         this.supply = supply;
-    }
-
-    protected boolean addExpense(Destination destination, int cost) {
-        if(cost < 0) {
-            return false;
-        }
-        destinationsAndCosts.add(new Expense(destination, cost));
-        return true;
     }
 
     public int getSupply() {
@@ -47,11 +41,11 @@ public class Source {
         return name;
     }
 
-    public void setType(SourceType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public SourceType getType() {
+    public String getType() {
         return type;
     }
 
@@ -61,7 +55,25 @@ public class Source {
                 "name='" + name + '\'' +
                 ", type=" + type +
                 ", supply=" + supply +
-                ", destinationsAndCosts=" + destinationsAndCosts +
                 '}';
     }
+
+    /**
+     * Place is a superclass of both Source and Destination that contains a common attribute: the name
+     */
+
+    public boolean equalsPlace(Place place) {
+        return this.name.equals(place.name);
+    }
+
+    /**
+     * How are we supposed to use this if we can't get the name of the Source/Destination?
+     * obj only takes the attributes of the superclass Object
+     */
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
 }

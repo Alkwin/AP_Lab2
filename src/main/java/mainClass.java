@@ -9,11 +9,17 @@ public class mainClass {
      */
 
     protected void startProgram(String[] args) {
-        executeCompulsory();
+        //executeCompulsory();
+        executeOptional();
     }
 
     private void executeCompulsory() {
         Compulsory obj = new Compulsory();
         obj.executeCompulsory();
+    }
+
+    private void executeOptional() {
+        Optional obj = new Optional();
+        obj.executeOptional();
     }
 }

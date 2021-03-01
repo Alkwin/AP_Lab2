@@ -1,16 +1,12 @@
-/**
- * Created by Craciun Tudor
- */
+import kotlin.Triple;
 
-/**
- * This class holds the Compulsory part of the 2nd laboratory
- * It showcases a 'hardcoded' example on how the created classes should be used
- */
+import java.util.ArrayList;
 
-public class Compulsory {
+public class Optional {
+
     ExpenseManager em = new ExpenseManager();
 
-    public void executeCompulsory() {
+    public void executeOptional() {
         Factory s1 = new Factory("S1", 10);
         addNewSource(s1);
         Warehouse s2 = new Warehouse("S2", 35);
@@ -37,8 +33,14 @@ public class Compulsory {
         addNewExpense(s3, d2, 6);
         addNewExpense(s3, d3, 8);
 
-        System.out.println(em.toString());
+        //displayTable();
 
+        computeSimpleSolution();
+
+    }
+
+    private void displayTable() {
+        System.out.println(em.toString());
     }
 
     public void addNewSource(Source source) {
@@ -55,4 +57,27 @@ public class Compulsory {
     ) {
         em.addOption(source, destination, cost);
     }
+
+    public void computeSimpleSolution() {
+        ArrayList<SolutionElement> simpleSolution = new ArrayList<>();
+        for(int i = 0; i < em.sources.size(); i++) {
+            while(em.sources.get(i).getSupply() > 0) {
+                Triple<String, String, Integer> cheapest = getCheapestForSource(em.sources.get(i));
+            }
+        }
+    }
+
+    private Triple<String, String, Integer> getCheapestForSource(Source source) {
+        Triple<String, String, Integer> cheapest = new Triple<String, String, Integer>("", "", 10000);
+        for(int i = 0; i < em.sourcesOptions.size(); i++) {
+            if(em.sourcesOptions.get(i).getFirst().equals(source.name)) {
+                if(em.sourcesOptions.get(i).getThird() < cheapest.getThird()) {
+                    cheapest = em.sourcesOptions.get(i);
+                }
+            }
+        }
+
+        return cheapest;
+    }
+
 }
